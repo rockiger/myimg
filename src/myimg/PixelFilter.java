@@ -20,7 +20,25 @@ public abstract class PixelFilter implements Filter {
 		
 		for (int y = 0; y < inputImage.getHeight(); y++) {
 			for (int x = 0; x < inputImage.getWidth(); x++) {
-				outputImage.setRGB(x, y, calculate(inputImage.getRGB(x, y)));
+				
+				if(mask == null)
+				{
+					outputImage.setRGB(x, y, calculate(inputImage.getRGB(x, y)));
+				}
+				else
+				{
+					if(getBlack() == mask.getRGB(x, y))
+					{
+						continue;
+					}
+					else
+					{
+						outputImage.setRGB(x, y, calculate(inputImage.getRGB(x, y)));
+					}
+					
+					
+				}
+				
 			}
 		}
 		return outputImage;
@@ -61,5 +79,12 @@ public abstract class PixelFilter implements Filter {
 	 */
 	protected int getRed(int pixelColor) {
 		return (pixelColor >> 16) & 0xFF;
+	}
+	protected int getBlack(){
+		int black;
+		
+		black = 0xFFFFFFF;
+		
+		return black;
 	}
 }

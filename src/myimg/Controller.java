@@ -28,6 +28,23 @@ public class Controller {
 			}
 		} else if (args.length == 5) {
 			// TODO Maskfall
+			
+			try {
+				BufferedImage image;
+				BufferedImage mask;
+				
+				image = ImageIO.read(new File(args[1]));
+				
+				mask = ImageIO.read(new File(args[3]));
+				
+				image = applyFilter(image, mask);
+				
+				ImageIO.write(image, "bmp", new File(args[4]));
+			} catch (IOException e) {
+				// TODO: handle exception	
+				e.printStackTrace();
+			}
+			
 		} else {
 			printHelpMessage();
 		}
@@ -36,11 +53,27 @@ public class Controller {
 	private BufferedImage applyFilter(BufferedImage image) {
 		BufferedImage filteredImage;
 		// TODO Map mit Filtern anlegen und hier auswählen.
-		PixelFilter filter = new MonochromeFilter();
+		
+//		PixelFilter filter = new ThresholdFilter(128);
+//		PixelFilter filter = new MonochromeFilter();
 //		PixelFilter filter = new ColorBandFilter(ColorBand.RED);
-//		PixelFilter filter = new ColorBandFilter(ColorBand.GREEN);
+		PixelFilter filter = new ColorBandFilter(ColorBand.GREEN);
 //		PixelFilter filter = new ColorBandFilter(ColorBand.BLUE);
 		filteredImage = filter.process(image);
+		
+		return filteredImage;
+	}
+	
+	private BufferedImage applyFilter(BufferedImage image, BufferedImage mask) {
+		BufferedImage filteredImage;
+		// TODO Map mit Filtern anlegen und hier auswählen.
+		
+//		PixelFilter filter = new ThresholdFilter(128);
+//		PixelFilter filter = new MonochromeFilter();
+		PixelFilter filter = new ColorBandFilter(ColorBand.RED);
+//		PixelFilter filter = new ColorBandFilter(ColorBand.GREEN);
+//		PixelFilter filter = new ColorBandFilter(ColorBand.BLUE);
+		filteredImage = filter.process(image,mask);
 		
 		return filteredImage;
 	}
