@@ -1,5 +1,6 @@
 package myimg;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public abstract class PixelFilter implements Filter {
@@ -27,9 +28,9 @@ public abstract class PixelFilter implements Filter {
 				}
 				else
 				{
-					if(getBlack() == mask.getRGB(x, y))
+					if(getWhite() == mask.getRGB(x, y))
 					{
-						continue;
+						outputImage.setRGB(x, y, inputImage.getRGB(x, y));
 					}
 					else
 					{
@@ -81,10 +82,18 @@ public abstract class PixelFilter implements Filter {
 		return (pixelColor >> 16) & 0xFF;
 	}
 	protected int getBlack(){
-		int black;
+		Color black;
 		
-		black = 0xFFFFFFF;
+		black = new Color(0,0,0);
 		
-		return black;
+		return black.getRGB();
+	}
+	
+	protected int getWhite(){
+		Color white;
+		
+		white = new Color(255,255,255);
+		
+		return white.getRGB();
 	}
 }

@@ -69,8 +69,8 @@ public class Controller {
 		// TODO Map mit Filtern anlegen und hier auswählen.
 		
 //		PixelFilter filter = new ThresholdFilter(128);
-//		PixelFilter filter = new MonochromeFilter();
-		PixelFilter filter = new ColorBandFilter(ColorBand.RED);
+		PixelFilter filter = new MonochromeFilter();
+//		PixelFilter filter = new ColorBandFilter(ColorBand.RED);
 //		PixelFilter filter = new ColorBandFilter(ColorBand.GREEN);
 //		PixelFilter filter = new ColorBandFilter(ColorBand.BLUE);
 		filteredImage = filter.process(image,mask);
